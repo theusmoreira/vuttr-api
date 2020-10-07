@@ -1,12 +1,22 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Tool from '../models/Tool';
+import Tool from '../database/entities/Tool';
 
-interface CreateToolDTO {
+interface ICreateToolDTO {
   title: string;
   link: string;
   description: string;
-  tag: Array<string>;
+  tags: Array<string>;
 }
 
 @EntityRepository(Tool)
-export default class ToolRepository extends Repository<Tool> {}
+class ToolRepository extends Repository<Tool> {
+  public async createTool(data: ICreateToolDTO): Promise<Tool> {
+    const tool = this.create(data);
+
+    await this.save(tool);
+
+    return tool;
+  }
+}
+
+export default ToolRepository;
