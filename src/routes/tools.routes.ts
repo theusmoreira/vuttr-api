@@ -3,8 +3,10 @@ import { getCustomRepository } from 'typeorm';
 
 import CreateToolService from '../services/CreateToolService';
 import ToolRepository from '../repositories/ToolsRepository';
+import ensureAuthenticated from '../middleware/ensureAuthenticated';
 
 const toolsRouter = Router();
+toolsRouter.use(ensureAuthenticated);
 
 toolsRouter.get('/', async (request: Request, response: Response) => {
   const toolRepository = getCustomRepository(ToolRepository);
