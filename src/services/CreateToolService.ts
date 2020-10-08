@@ -7,6 +7,7 @@ interface IRequest {
   link: string;
   description: string;
   tags: Array<string>;
+  user_id: string;
 }
 
 class CreateToolService {
@@ -15,6 +16,7 @@ class CreateToolService {
     description,
     link,
     tags,
+    user_id,
   }: IRequest): Promise<Tool> {
     const toolRepository = getCustomRepository(ToolRepository);
     const tool = await toolRepository.createTool({
@@ -22,6 +24,7 @@ class CreateToolService {
       description,
       link,
       tags,
+      user_id,
     });
 
     return tool;

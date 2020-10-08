@@ -6,6 +6,7 @@ interface ICreateToolDTO {
   link: string;
   description: string;
   tags: Array<string>;
+  user_id: string;
 }
 
 @EntityRepository(Tool)
