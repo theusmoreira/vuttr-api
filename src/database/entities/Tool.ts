@@ -7,6 +7,9 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+
+import { Exclude } from 'class-transformer';
+
 import User from './User';
 
 @Entity('tools')
@@ -15,6 +18,7 @@ class Tool {
   id: string;
 
   @Column()
+  @Exclude()
   user_id: string;
 
   @ManyToOne(() => User)
@@ -30,7 +34,7 @@ class Tool {
   @Column()
   description: string;
 
-  @Column('text', { array: true })
+  @Column('simple-array')
   tags: Array<string>;
 
   @CreateDateColumn()
