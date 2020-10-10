@@ -1,6 +1,6 @@
-import { getCustomRepository } from 'typeorm';
+import { injectable, inject } from 'tsyringe';
 import Tool from '../infra/typeorm/entities/Tool';
-import ToolRepository from '../repositories/ToolsRepository';
+import IToolRepository from '../repositories/IToolRepository';
 
 interface IRequest {
   title: string;
@@ -10,7 +10,13 @@ interface IRequest {
   user_id: string;
 }
 
+@injectable()
 class CreateToolService {
+  constructor(
+    @inject('ToolsRepository')
+    private toolsRepository: IToolRepository,
+  ) {}
+
   public async execute({
     title,
     description,
@@ -18,8 +24,7 @@ class CreateToolService {
     tags,
     user_id,
   }: IRequest): Promise<Tool> {
-    const toolRepository = getCustomRepository(ToolRepository);
-    const tool = await toolRepository.createTool({
+    const tool = await this.toolsRepository.create({
       title,
       description,
       link,

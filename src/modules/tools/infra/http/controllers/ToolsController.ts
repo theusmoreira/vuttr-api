@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-
+import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
 import CreateToolService from '@modules/tools/services/CreateToolService';
@@ -12,7 +12,7 @@ export default class ToolsController {
     try {
       const user_id = request.user.id;
       const { title, link, description, tags } = request.body;
-      const createToolService = new CreateToolService();
+      const createToolService = container.resolve(CreateToolService);
 
       const tool = await createToolService.execute({
         title,
@@ -31,8 +31,10 @@ export default class ToolsController {
     try {
       const user_id = request.user.id;
       const { tag } = request.query;
-      const listTools = new ListToolsUser();
-      const listToolsforTagService = new ListToolsUserForTagService();
+      const listTools = container.resolve(ListToolsUser);
+      const listToolsforTagService = container.resolve(
+        ListToolsUserForTagService,
+      );
 
       if (tag) {
         const tools = await listToolsforTagService.execute({
@@ -54,7 +56,7 @@ export default class ToolsController {
       const user_id = request.user.id;
       const { id } = request.params;
 
-      const deleteTool = new DeleteToolService();
+      const deleteTool = container.resolve(DeleteToolService);
 
       await deleteTool.execute({
         user_id,

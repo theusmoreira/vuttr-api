@@ -1,22 +1,24 @@
-import { getCustomRepository } from 'typeorm';
+import { injectable, inject } from 'tsyringe';
 import Tool from '../infra/typeorm/entities/Tool';
-import ToolRepository from '../repositories/ToolsRepository';
+import IToolRepository from '../repositories/IToolRepository';
 
 interface IRequest {
   tag: string;
   user_id: string;
 }
 
-class ListToolsUserService {
+@injectable()
+class ListToolsUserForTagService {
+  constructor(
+    @inject('ToolsRepository')
+    private toolsRepository: IToolRepository,
+  ) {}
+
   public async execute({ user_id, tag }: IRequest): Promise<Tool[]> {
-    const toolRepository = getCustomRepository(ToolRepository);
+    const tools = await this.toolsRepository.findToolsWithTag(user_id, tag);
 
-    const tools = await toolRepository.find({ where: { user_id } });
-
-    const findToolsforTag = tools.filter(tool => tool.tags.includes(tag));
-
-    return findToolsforTag;
+    return tools;
   }
 }
 
-export default ListToolsUserService;
+export default ListToolsUserForTagService;

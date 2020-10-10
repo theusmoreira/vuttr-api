@@ -1,26 +1,30 @@
-import { getCustomRepository } from 'typeorm';
-
 import AppError from '@shared/errors/AppError';
-import ToolRepository from '../repositories/ToolsRepository';
+import { inject, injectable } from 'tsyringe';
+import IToolRepository from '../repositories/IToolRepository';
 
 interface IRequest {
   user_id: string;
   id: string;
 }
 
+@injectable()
 class DeleteToolService {
+  constructor(
+    @inject('ToolsRepository')
+    private toolsRepository: IToolRepository,
+  ) {}
+
   public async execute({ user_id, id }: IRequest): Promise<void> {
-    const toolRepository = getCustomRepository(ToolRepository);
+    const checkToolExits = await this.toolsRepository.findToolByUserIdAndToolId(
+      user_id,
+      id,
+    );
 
-    const checkToolExits = await toolRepository.find({
-      where: { user_id, id },
-    });
-
-    if (!checkToolExits.length) {
+    if (!checkToolExits) {
       throw new AppError('Tool not exits');
     }
 
-    await toolRepository.delete({ user_id, id });
+    await this.toolsRepository.deleteTool(user_id, id);
   }
 }
 
