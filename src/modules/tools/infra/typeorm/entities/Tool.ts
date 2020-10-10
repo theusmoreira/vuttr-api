@@ -10,7 +10,7 @@ import {
 
 import { Exclude } from 'class-transformer';
 
-import User from './User';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('tools')
 class Tool {

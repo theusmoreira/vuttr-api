@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Tool from '../database/entities/Tool';
+import Tool from '../infra/typeorm/entities/Tool';
 
 interface ICreateToolDTO {
   title: string;

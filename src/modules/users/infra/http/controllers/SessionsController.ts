@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { classToClass } from 'class-transformer';
 
-import AuthenticateUserService from '../services/AuthenticateUserService';
+import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
 
 export default class SessionsController {
   async create(request: Request, response: Response): Promise<Response> {

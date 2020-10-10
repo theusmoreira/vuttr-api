@@ -1,8 +1,9 @@
 import 'reflect-metadata';
-import './database';
+import '@shared/infra/typeorm';
+
 import express, { Request, Response, NextFunction } from 'express';
+import AppError from '@shared/errors/AppError';
 import routes from './routes';
-import AppError from './errors/AppError';
 
 const app = express();
 

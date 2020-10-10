@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 
 import { classToClass } from 'class-transformer';
 
-import CreateToolService from '../services/CreateToolService';
-import ListToolsUser from '../services/ListToolsUserService';
-import ListToolsUserForTagService from '../services/ListToolsUserForTagService';
-import DeleteToolService from '../services/DeleteToolService';
+import CreateToolService from '@modules/tools/services/CreateToolService';
+import ListToolsUser from '@modules/tools/services/ListToolsUserService';
+import ListToolsUserForTagService from '@modules/tools/services/ListToolsUserForTagService';
+import DeleteToolService from '@modules/tools/services/DeleteToolService';
 
 export default class ToolsController {
   async create(request: Request, response: Response): Promise<Response> {

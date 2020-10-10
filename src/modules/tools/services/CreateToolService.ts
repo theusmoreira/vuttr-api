@@ -1,5 +1,5 @@
 import { getCustomRepository } from 'typeorm';
-import Tool from '../database/entities/Tool';
+import Tool from '../infra/typeorm/entities/Tool';
 import ToolRepository from '../repositories/ToolsRepository';
 
 interface IRequest {

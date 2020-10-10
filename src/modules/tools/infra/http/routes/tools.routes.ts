@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import ensureAuthenticated from '../middleware/ensureAuthenticated';
+import ensureAuthenticated from '@modules/users/infra/http/middleware/ensureAuthenticated';
 import ToolsController from '../controllers/ToolsController';
 
 const toolsRouter = Router();
