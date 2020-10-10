@@ -50,15 +50,20 @@ class ToolRepository implements IToolRepository {
   }
 
   public async findToolsWithTag(user_id: string, tag: string): Promise<Tool[]> {
-    const tools = await this.ormRepository
-      .createQueryBuilder('tools')
-      .where('tools.user_id = :user_id', { user_id })
-      .where('tools.tags IN (:...tags)', {
-        tags: [tag],
-      })
-      .getMany();
+    const tools = await this.ormRepository.find({
+      where: { user_id },
+    });
 
-    return tools;
+    const findToolsTag = tools.filter(tool => tool.tags.includes(tag));
+
+    // .createQueryBuilder('tools')
+    // .where('tools.user_id = :user_id', { user_id })
+    // .where('tools.tags IN (:...tags)', {
+    //   tags: [tag],
+    // })
+    // .getMany();
+
+    return findToolsTag;
   }
 }
 
