@@ -1,11 +1,16 @@
 import FakeToolRepository from '../repositories/fakes/FakeToolRepository';
 import CreateToolService from './CreateToolService';
 
-describe('CreateToolService', () => {
-  it('should be able to create a new tool', async () => {
-    const fakeToolRepository = new FakeToolRepository();
-    const createToolService = new CreateToolService(fakeToolRepository);
+let createToolService: CreateToolService;
+let fakeToolRepository: FakeToolRepository;
 
+describe('CreateToolService', () => {
+  beforeEach(() => {
+    fakeToolRepository = new FakeToolRepository();
+    createToolService = new CreateToolService(fakeToolRepository);
+  });
+
+  it('should be able to create a new tool', async () => {
     const tool = await createToolService.execute({
       title: 'Test',
       description: 'description-test',

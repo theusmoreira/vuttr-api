@@ -2,11 +2,16 @@ import AppError from '@shared/errors/AppError';
 import FakeToolRepository from '../repositories/fakes/FakeToolRepository';
 import DeleteToolService from './DeleteToolService';
 
-describe('DeleteToolService', () => {
-  it('should be able to delete a tool', async () => {
-    const fakeToolRepository = new FakeToolRepository();
-    const deleteToolService = new DeleteToolService(fakeToolRepository);
+let fakeToolRepository: FakeToolRepository;
+let deleteToolService: DeleteToolService;
 
+describe('DeleteToolService', () => {
+  beforeEach(() => {
+    fakeToolRepository = new FakeToolRepository();
+    deleteToolService = new DeleteToolService(fakeToolRepository);
+  });
+
+  it('should be able to delete a tool', async () => {
     const tool = await fakeToolRepository.create({
       title: 'Test',
       description: 'description-test',
@@ -26,9 +31,6 @@ describe('DeleteToolService', () => {
   });
 
   it('should not be able to delete a tool with a non-existent id', async () => {
-    const fakeToolRepository = new FakeToolRepository();
-    const deleteToolService = new DeleteToolService(fakeToolRepository);
-
     await fakeToolRepository.create({
       title: 'Test',
       description: 'description-test',

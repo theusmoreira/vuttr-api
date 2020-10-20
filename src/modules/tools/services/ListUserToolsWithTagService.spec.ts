@@ -1,13 +1,15 @@
 import FakeToolRepository from '../repositories/fakes/FakeToolRepository';
 import ListUserToolsWithTagService from './ListUserToolsWithTagService';
 
-describe('ListToolWithTagService', () => {
-  it('should be able to list tools with tag', async () => {
-    const fakeToolRepository = new FakeToolRepository();
-    const listToolsWithTag = new ListUserToolsWithTagService(
-      fakeToolRepository,
-    );
+let fakeToolRepository: FakeToolRepository;
+let listToolsWithTag: ListUserToolsWithTagService;
 
+describe('ListToolWithTagService', () => {
+  beforeEach(() => {
+    fakeToolRepository = new FakeToolRepository();
+    listToolsWithTag = new ListUserToolsWithTagService(fakeToolRepository);
+  });
+  it('should be able to list tools with tag', async () => {
     await fakeToolRepository.create({
       title: 'Test',
       description: 'description-test',

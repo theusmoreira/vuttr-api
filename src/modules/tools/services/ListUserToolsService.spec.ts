@@ -1,11 +1,15 @@
 import FakeToolRepository from '../repositories/fakes/FakeToolRepository';
 import ListUserTools from './ListUserToolsService';
 
-describe('ListToolsService', () => {
-  it('should be able to list tools', async () => {
-    const fakeToolRepository = new FakeToolRepository();
-    const listTools = new ListUserTools(fakeToolRepository);
+let fakeToolRepository: FakeToolRepository;
+let listUserTools: ListUserTools;
 
+describe('ListToolsService', () => {
+  beforeEach(() => {
+    fakeToolRepository = new FakeToolRepository();
+    listUserTools = new ListUserTools(fakeToolRepository);
+  });
+  it('should be able to list tools', async () => {
     const tool1 = await fakeToolRepository.create({
       title: 'Test',
       description: 'description-test',
@@ -30,7 +34,7 @@ describe('ListToolsService', () => {
       user_id: 'user-id',
     });
 
-    const tools = await listTools.execute({
+    const tools = await listUserTools.execute({
       user_id: 'user-id',
     });
 
@@ -38,9 +42,6 @@ describe('ListToolsService', () => {
   });
 
   it('should not be able to list another user tools', async () => {
-    const fakeToolRepository = new FakeToolRepository();
-    const listTools = new ListUserTools(fakeToolRepository);
-
     const tool1 = await fakeToolRepository.create({
       title: 'Test',
       description: 'description-test',
@@ -65,7 +66,7 @@ describe('ListToolsService', () => {
       user_id: 'user-id',
     });
 
-    const tools = await listTools.execute({
+    const tools = await listUserTools.execute({
       user_id: 'another-id',
     });
 
