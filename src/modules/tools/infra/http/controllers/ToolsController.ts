@@ -3,9 +3,9 @@ import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
 import CreateToolService from '@modules/tools/services/CreateToolService';
-import ListToolsUser from '@modules/tools/services/ListToolsUserService';
-import ListToolsUserForTagService from '@modules/tools/services/ListToolsUserForTagService';
+import ListUserToolsService from '@modules/tools/services/ListUserToolsService';
 import DeleteToolService from '@modules/tools/services/DeleteToolService';
+import ListUserToolsWithTagService from '@modules/tools/services/ListUserToolsWithTagService';
 
 export default class ToolsController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -31,9 +31,9 @@ export default class ToolsController {
     try {
       const user_id = request.user.id;
       const { tag } = request.query;
-      const listTools = container.resolve(ListToolsUser);
+      const listToolsUser = container.resolve(ListUserToolsService);
       const listToolsforTagService = container.resolve(
-        ListToolsUserForTagService,
+        ListUserToolsWithTagService,
       );
 
       if (tag) {
@@ -44,7 +44,7 @@ export default class ToolsController {
         return response.json(classToClass(tools));
       }
 
-      const tools = await listTools.execute({ user_id });
+      const tools = await listToolsUser.execute({ user_id });
       return response.json(classToClass(tools));
     } catch (err) {
       return response.status(400).json({ error: err.message });
