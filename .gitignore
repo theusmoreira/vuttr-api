@@ -5,7 +5,8 @@ coverage/
 build/
 dist/
 
-# ormconfig.js
+
+ormconfig.js
 
 tmp/*
 !tmp/.gitkeep
