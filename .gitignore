@@ -6,7 +6,5 @@ build/
 dist/
 
 
-ormconfig.js
-
 tmp/*
 !tmp/.gitkeep
