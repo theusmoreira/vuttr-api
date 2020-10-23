@@ -7,8 +7,8 @@ const devConfig = [
     host: process.env.POSTGRES_HOST,
     port: 5432,
     username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASS,
-    database: process.env.POSTGRES_DB_NAME,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
     entities: [
       './src/modules/**/infra/typeorm/entities/*.ts'
     ],
@@ -28,8 +28,8 @@ const prodConfig = [
     host: process.env.POSTGRES_HOST,
     port: 5432,
     username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASS,
-    database: process.env.POSTGRES_DB_NAME,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
     entities: [
       './dist/modules/**/infra/typeorm/entities/*.js'
     ],
@@ -43,4 +43,4 @@ const prodConfig = [
 
 ];
 
-module.exports = process.env.NODE_ENV === 'development' ? devConfig : prodConfig;
+module.exports = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
