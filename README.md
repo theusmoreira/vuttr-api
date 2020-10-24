@@ -23,7 +23,7 @@
 - [Sobre](#about)
 - [Começando](#getting_started)
 - [Uso](#usage)
-- [TODO](../TODO.md)
+- [TODO](./TODO.md)
 - [Autor](#authors)
 
 ## 🧐 Sobre <a name = "about"></a>
