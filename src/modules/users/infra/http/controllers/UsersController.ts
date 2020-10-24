@@ -17,7 +17,7 @@ export default class UsersControllers {
         password,
       });
 
-      return response.json(classToClass(user));
+      return response.status(201).json(classToClass(user));
     } catch (err) {
       return response.status(400).json({ error: err.message });
     }
