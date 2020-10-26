@@ -42,11 +42,11 @@ A API está disponível em produção em https://vuttr-api.matheussantosdev.com.
 Já existe um usuário de testes, abaixo estão credenciais para login.
 
 ```json
-"email": "test@test.com"
+"email": "test@test.com",
 "password": "123456"
 ```
 
-Se tiver interesse em rodar a aplicação em ambiente local, continue seguindo os passos abaixo.
+Para rodar a aplicação em ambiente local, continue seguindo os passos abaixo.
 
 ### Pré-requisitos
 
